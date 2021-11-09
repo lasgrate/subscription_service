@@ -1,0 +1,15 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  KiloHealth\:
+    resource: '../src'
+    exclude:
+      - '../src/Subscription/Ui/DependencyInjection/'
+      - '../src/Subscription/Ui/Kernel.php'
+      - '../src/Subscription/Domain/ValueObject/'
+
+  KiloHealth\Subscription\Ui\Http\:
+    resource: '../src/Subscription/Ui/Http/'
+    tags: ['controller.service_arguments']

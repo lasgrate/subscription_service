@@ -1,0 +1,10 @@
+doctrine:
+  dbal:
+    connections:
+      currency_rate:
+        server_version: 8.0
+        dbname: '%env(SUBSCRIPTION_DB_NAME)%'
+        user: '%env(SUBSCRIPTION_DB_USER)%'
+        password: '%env(SUBSCRIPTION_DB_PASSWORD)%'
+        host: '%env(SUBSCRIPTION_DB_HOST)%'
+        driver: 'pdo_mysql'

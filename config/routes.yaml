@@ -1,0 +1,4 @@
+currencyRate.rateList:
+  path: /api/v1/rates
+  controller: KiloHealth\Subscription\Ui\Http\Api\Rate\ListAction
+  methods: GET
