@@ -1,4 +1,4 @@
-currencyRate.rateList:
-  path: /api/v1/rates
-  controller: KiloHealth\Subscription\Ui\Http\Api\Rate\ListAction
+api.subscription.applePayCallback:
+  path: /api/v1/subscription/applePayCallback
+  controller: KiloHealth\Subscription\Ui\Http\Api\Subscription\ApplePayCallbackAction
   methods: GET

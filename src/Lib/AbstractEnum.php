@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phoenix\Payment\Lib;
+namespace KiloHealth\Lib;
 
 abstract class AbstractEnum
 {
