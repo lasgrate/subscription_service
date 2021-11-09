@@ -70,7 +70,7 @@ class InitialPaymentProcessorTest extends TestCase
             'transaction' => new Transaction(
                 new TransactionId(\md5('transactionId')),
                 new SubscriptionId(\md5('subscriptionId')),
-                Status::getObject(Status::STATUS_DECLINED),
+                Status::getObject(Status::STATUS_CHARGED),
                 PaymentGateway::getObject(PaymentGateway::PSP_APPLE_PAY)
             ),
         ];

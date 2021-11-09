@@ -19,11 +19,11 @@ class SubscriptionCallbackHandler
     public function handle(PaymentProviderNotification $requestDto): void
     {
         $subscriptionEvent = SubscriptionEvent::getObject($requestDto->getEventType());
-        $psp = PaymentGateway::getObject($requestDto->getPaymentProvider());
+        $paymentGateway = PaymentGateway::getObject($requestDto->getPaymentProvider());
         $eventProcessor = $this->subscriptionEventProcessorResolver->resolve($subscriptionEvent);
 
         foreach ($requestDto->getProducts() as $product) {
-            $eventProcessor->process($psp, $product);
+            $eventProcessor->process($paymentGateway, $product);
         }
     }
 }

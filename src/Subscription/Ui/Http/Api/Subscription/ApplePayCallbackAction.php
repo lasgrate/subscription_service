@@ -45,7 +45,7 @@ class ApplePayCallbackAction
                 ], 402);
             }
         } catch (\Throwable $exception) {
-            $this->logger->error('[Subscription\] Failed while process request', [
+            $this->logger->error('[Subscription\ApplePayCallbackAction] Failed while process request', [
                 'exception' => $exception,
             ]);
 
