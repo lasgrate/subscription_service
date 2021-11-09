@@ -3,9 +3,9 @@
 namespace KiloHealth\Subscription\Application\Command\SubscriptionEventProcessor;
 
 use KiloHealth\Subscription\Application\Dto\Callback\Product;
-use KiloHealth\Subscription\Domain\ValueObject\Psp;
+use KiloHealth\Subscription\Domain\ValueObject\PaymentGateway;
 
 interface SubscriptionEventProcessorInterface
 {
-    public function process(Psp $psp, Product $product): void;
+    public function process(PaymentGateway $paymentGateway, Product $product): void;
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KiloHealth\Subscription\Domain\Entity;
 
-use KiloHealth\Subscription\Domain\ValueObject\Psp;
+use KiloHealth\Subscription\Domain\ValueObject\PaymentGateway;
 use KiloHealth\Subscription\Domain\ValueObject\Status;
 use KiloHealth\Subscription\Domain\ValueObject\SubscriptionId;
 use KiloHealth\Subscription\Domain\ValueObject\TransactionId;
@@ -15,7 +15,7 @@ class Transaction
         private TransactionId $transactionId,
         private SubscriptionId $subscriptionId,
         private Status $status,
-        private Psp $psp
+        private PaymentGateway $paymentGateway
     ) {
     }
 
@@ -34,8 +34,8 @@ class Transaction
         return $this->status;
     }
 
-    public function getPsp(): Psp
+    public function getPaymentGateway(): PaymentGateway
     {
-        return $this->psp;
+        return $this->paymentGateway;
     }
 }

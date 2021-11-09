@@ -1,4 +1,4 @@
 api.subscription.applePayCallback:
   path: /api/v1/subscription/applePayCallback
   controller: KiloHealth\Subscription\Ui\Http\Api\Subscription\ApplePayCallbackAction
-  methods: GET
+  methods: POST

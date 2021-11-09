@@ -8,7 +8,7 @@ use KiloHealth\Subscription\Application\Dto\Callback\Product;
 use KiloHealth\Subscription\Domain\Entity\Transaction;
 use KiloHealth\Subscription\Domain\Repository\SubscriptionRepositoryInterface;
 use KiloHealth\Subscription\Domain\Repository\TransactionRepositoryInterface;
-use KiloHealth\Subscription\Domain\ValueObject\Psp;
+use KiloHealth\Subscription\Domain\ValueObject\PaymentGateway;
 use KiloHealth\Subscription\Domain\ValueObject\Status;
 
 class RenewSubscriptionProcessor implements SubscriptionEventProcessorInterface
@@ -19,7 +19,7 @@ class RenewSubscriptionProcessor implements SubscriptionEventProcessorInterface
     ) {
     }
 
-    public function process(Psp $psp, Product $product): void
+    public function process(PaymentGateway $paymentGateway, Product $product): void
     {
         $subscription = $this->subscriptionRepository->findByReference($product->getReference());
 
@@ -34,7 +34,7 @@ class RenewSubscriptionProcessor implements SubscriptionEventProcessorInterface
             $transactionId,
             $subscription->getSubscriptionId(),
             Status::getObject(Status::STATUS_CHARGED),
-            $psp
+            $paymentGateway
         );
         $this->transactionRepository->save($transaction);
     }

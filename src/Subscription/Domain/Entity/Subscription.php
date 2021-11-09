@@ -8,7 +8,7 @@ class Subscription
 {
     public function __construct(
         private SubscriptionId $subscriptionId,
-        private string $pspReference,
+        private string $reference,
         private \DateTimeImmutable $expiredAt
     ) {
     }
@@ -18,9 +18,9 @@ class Subscription
         return $this->subscriptionId;
     }
 
-    public function getPspReference(): string
+    public function getReference(): string
     {
-        return $this->pspReference;
+        return $this->reference;
     }
 
     public function getExpiredAt(): \DateTimeImmutable

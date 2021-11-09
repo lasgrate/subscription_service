@@ -11,9 +11,9 @@ interface SubscriptionRepositoryInterface
 {
     public function generateSubscriptionId(): SubscriptionId;
 
-    public function save(Subscription $subscription);
+    public function save(Subscription $subscription): void;
 
-    public function updateExpiredAt(SubscriptionId $subscriptionId, \DateTimeImmutable $expiredAt);
+    public function updateExpiredAt(SubscriptionId $subscriptionId, \DateTimeImmutable $expiredAt): void;
 
     public function findByReference(string $reference): ?Subscription;
 }

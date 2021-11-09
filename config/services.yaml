@@ -13,3 +13,19 @@ services:
   KiloHealth\Subscription\Ui\Http\:
     resource: '../src/Subscription/Ui/Http/'
     tags: ['controller.service_arguments']
+
+  KiloHealth\Subscription\Infrastructure\Persistence\DB\SubscriptionRepository:
+    arguments:
+      $connection: '@doctrine.dbal.subscription_connection'
+
+  KiloHealth\Subscription\Domain\Repository\SubscriptionRepositoryInterface:
+    public: true
+    alias: KiloHealth\Subscription\Infrastructure\Persistence\DB\SubscriptionRepository
+
+  KiloHealth\Subscription\Infrastructure\Persistence\DB\TransactionRepository:
+    arguments:
+      $connection: '@doctrine.dbal.subscription_connection'
+
+  KiloHealth\Subscription\Domain\Repository\TransactionRepository:
+    public: true
+    alias: KiloHealth\Subscription\Infrastructure\Persistence\DB\TransactionRepository

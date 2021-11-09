@@ -6,7 +6,7 @@ namespace KiloHealth\Subscription\Application\Command;
 
 use KiloHealth\Subscription\Application\Command\SubscriptionEventProcessor\SubscriptionEventProcessorResolver;
 use KiloHealth\Subscription\Application\Dto\Callback\PaymentProviderNotification;
-use KiloHealth\Subscription\Domain\ValueObject\Psp;
+use KiloHealth\Subscription\Domain\ValueObject\PaymentGateway;
 use KiloHealth\Subscription\Domain\ValueObject\SubscriptionEvent;
 
 class SubscriptionCallbackHandler
@@ -19,7 +19,7 @@ class SubscriptionCallbackHandler
     public function handle(PaymentProviderNotification $requestDto): void
     {
         $subscriptionEvent = SubscriptionEvent::getObject($requestDto->getEventType());
-        $psp = Psp::getObject($requestDto->getPaymentProvider());
+        $psp = PaymentGateway::getObject($requestDto->getPaymentProvider());
         $eventProcessor = $this->subscriptionEventProcessorResolver->resolve($subscriptionEvent);
 
         foreach ($requestDto->getProducts() as $product) {

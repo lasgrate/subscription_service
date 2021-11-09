@@ -9,7 +9,7 @@ use KiloHealth\Subscription\Domain\Entity\Subscription;
 use KiloHealth\Subscription\Domain\Entity\Transaction;
 use KiloHealth\Subscription\Domain\Repository\SubscriptionRepositoryInterface;
 use KiloHealth\Subscription\Domain\Repository\TransactionRepositoryInterface;
-use KiloHealth\Subscription\Domain\ValueObject\Psp;
+use KiloHealth\Subscription\Domain\ValueObject\PaymentGateway;
 use KiloHealth\Subscription\Domain\ValueObject\Status;
 
 class InitialPaymentProcessor implements SubscriptionEventProcessorInterface
@@ -20,7 +20,7 @@ class InitialPaymentProcessor implements SubscriptionEventProcessorInterface
     ) {
     }
 
-    public function process(Psp $psp, Product $product): void
+    public function process(PaymentGateway $paymentGateway, Product $product): void
     {
         $subscriptionId = $this->subscriptionRepository->generateSubscriptionId();
         $subscription = new Subscription(
@@ -35,7 +35,7 @@ class InitialPaymentProcessor implements SubscriptionEventProcessorInterface
             $transactionId,
             $subscriptionId,
             Status::getObject(Status::STATUS_CHARGED),
-            $psp
+            $paymentGateway
         );
         $this->transactionRepository->save($transaction);
     }
