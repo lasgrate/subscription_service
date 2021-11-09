@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KiloHealth\Subscription\Ui\Http\Api\Subscription;
 
+use KiloHealth\Subscription\Application\Command\SubscriptionCallbackHandler;
+use KiloHealth\Subscription\Ui\Transformer\SubscriptionRequestTransformer;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -14,6 +16,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class ApplePayCallbackAction
 {
     public function __construct(
+        private SubscriptionRequestTransformer $transformer,
+        private SubscriptionCallbackHandler $subscriptionCallbackHandler,
         private ValidatorInterface $validator,
         private LoggerInterface $logger
     ) {
@@ -22,17 +26,15 @@ class ApplePayCallbackAction
     public function __invoke(Request $request): Response
     {
         try {
-            return new Response('Hello word!');
-
             $errors = $this->validator->validate($request->query->all(), [
-//                new Assert\Collection([
-//                    'date' => new Assert\Date(),
-//                    'from' => new Assert\Currency(),
-//                ]),
+                // describe validation
             ]);
 
             if ($errors->count() === 0) {
+                $requestDto = $this->transformer->transform($request);
+                $this->subscriptionCallbackHandler->handle($requestDto);
 
+                return new Response(status: 200);
             } else {
                 return new JsonResponse([
                     'payload' => \sprintf(
